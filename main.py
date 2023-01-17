@@ -12,7 +12,7 @@ Note:   any user input/output should be done using the appropriate functions in 
 # Task 11: Import required modules and create an empty list named 'reviews_data'.
 # This will be used to store the data read from the source data file.
 # TODO: Your code here
-
+print("Hi")
 
 def run():
     # Task 12: Call the function welcome of the module 'tui'.
