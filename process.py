@@ -22,5 +22,27 @@ The required functions are as follows:
     - the total number of positive reviews on that date
     - the average rating on that date
 """
+import tui
+import csv
+import process
 
-# TODO: Your code here
+def retrieve_review_count(reviews):
+    return len(reviews)
+
+def retrieve_reviews_by_hotel(reviews):
+    hotel_name = tui.get_hotel_name()
+    reviews_by_hotel = process.filter_reviews_by_hotel(reviews, hotel_name)
+    return reviews_by_hotel
+
+def retrieve_reviews_by_dates(reviews):
+    review_dates = tui.get_review_dates()
+    reviews_by_dates = process.filter_reviews_by_dates(reviews, review_dates)
+    return reviews_by_dates
+
+def retrieve_reviews_by_nationality(reviews):
+    grouped_reviews = process.group_reviews_by_nationality(reviews)
+    return grouped_reviews
+
+def retrieve_reviews_summary(reviews):
+    summary = process.summarize_reviews(reviews)
+    return summary

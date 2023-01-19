@@ -11,5 +11,16 @@ Task 22 - 24: Write suitable functions to visualise the data as follows:
 
 Each function should visualise the data using Matplotlib.
 """
+import tui 
+import main
+import process 
+import matplotlib.pyplot as plt
+import numpy as np
 
-# TODO: Your code here
+Positive_Reviews = np.array([])
+Example_lables=["A", "B", "C", "D", "E"]
+my_explode= [0.2, 0, 0, 0, 0]
+
+plt.pie(z, Example_lables, explode = my_explode)
+
+plt.show()

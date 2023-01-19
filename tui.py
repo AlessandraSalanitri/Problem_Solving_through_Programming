@@ -20,7 +20,8 @@ def welcome():
     :return: Does not return anything.
     """
 
-print('Welcome to "Hotel Reviews"')
+title = "Hotel Reviews"
+print("-" * len(title) + " " + title + " " + "-" * len(title))
 
 
 def error(msg):
@@ -37,6 +38,7 @@ def error(msg):
 
 print("Error!{error_msg}.")
 
+import time
 
 def progress(operation, value):
     """
@@ -56,13 +58,23 @@ def progress(operation, value):
     :param value: an integer indicating the amount of progress made
     :return: does not return anything
     """
+
+
+
     if value == 0:
-        status = 'initiated'
-    elif value >= 0 and value < 100:
-        status = f'in progress ({value}% completed)'
-    elif value == 100:
-        status = 'completed'
-    print(f'Operation: {operation} [{status}].')
+        status = "Loading has initiated"
+    elif value < 100:
+        status = f"Loading in progress ({value}% completed)"
+    else:
+        status = "Loading completed"
+    print(f"Operation: {operation} [{status}].")
+    time.sleep(1) 
+
+
+for i in range(1, 101, 40):
+    progress("Uploading Files", i)
+
+""""""
 
 
 
@@ -84,9 +96,21 @@ def main_menu():
     :return: an integer for a valid selection
     """
 
-print("\nPlease Select one of the menu Options: ?")
-print(" \n 1- Load Data\n 2- Process Data\n 3- Visualise Data\n 4- Save Data\n 5- Exit  ")
-menu_option = int(input())
+
+    while True:
+        print("Main Menu")
+        print('[1] Process Data', '\n[2] Visualise Data', '\n[3] Export Data', '\n[4] Exit') 
+        try:
+            Option = int(input("Enter your choice: "))
+            if Option in range(1,5):
+                return Option
+            else:
+                raise ValueError
+        except ValueError:
+            print("Invalid option. Please try again.")
+
+main_menu()
+
 
 
 
@@ -118,8 +142,41 @@ def sub_menu(variant=0):
 
     :return: 0 if invalid selection otherwise an integer for a valid selection
     """
-    # TODO: Your code here
-    pass # can remove
+
+
+    if variant == 1:
+        print('[1] Reviews for Hotel')
+        print('[2] Reviews for Dates')
+        print('[3] Reviews for Nationality')
+        print('[4] Reviews Summary')
+    elif variant == 2:
+        print('[1] Positive/Negative Pie Chart')
+        print('[2] Reviews Per Nationality Chart')
+        print('[3] Animated Summary')
+    elif variant == 3:
+        print('[1] All Reviews')
+        print('[2] Reviews for Specific Hotel')
+    else:
+
+        print("Invalid choice. Please select a valid option.")
+        return 0
+   
+
+    try:
+        choice = int(input("Enter your choice: "))
+        if variant == 1 and choice in range(1,5):
+            return choice
+        elif variant == 2 and choice in range(1,4):
+            return choice
+        elif variant == 3 and choice in range(1,3):
+            return choice
+        else:
+            raise ValueError
+    except ValueError:
+        print("Invalid choice. Please select a valid option.")
+        return 0
+
+sub_menu()
 
 
 def total_reviews(num_reviews):
@@ -135,8 +192,8 @@ def total_reviews(num_reviews):
     :param num_reviews: the total number of reviews in the data set
     :return: Does not return anything
     """
-    # TODO: Your code here
-    pass # can remove
+
+    print(f'There are {num_reviews} reviews in the data set.')
 
 
 def hotel_name():
@@ -148,8 +205,9 @@ def hotel_name():
 
     :return: the name of a hotel
     """
-    # TODO: Your code here
-    pass # can remove
+
+    hotel_name = input("Enter the hotel name: ")
+    return hotel_name
 
 
 def review_dates():
@@ -166,9 +224,17 @@ def review_dates():
 
     :return: a list of review dates
     """
-    # TODO: Your code here
-    pass # can remove
 
+    dates = []
+    while True:
+        date = input("Please enter a review date in the format mm/dd/yyyy ")
+        if date.lower() == 'done':
+            break
+        else:
+            dates.append(date)
+    return dates
+
+review_dates()
 
 def display_review(review, cols=None):
     """
@@ -197,11 +263,15 @@ def display_review(review, cols=None):
     :param cols: A list of integer values that represent column indexes
     :return: Does not return anything
     """
-    # TODO: Your code here
-    pass # can remove
+    
+    if cols is None or not cols:
+        print(review)
+    else:
+        print([review[i] for i in cols])
+display_review()
 
 
-def display_reviews():
+def display_reviews(reviews, cols):
     """
     Task 10: Display each review in the specified list of reviews.
     
@@ -213,7 +283,7 @@ def display_reviews():
 
     reviews     which is a list of reviews where each reviews itself is a list of data values.
     cols        this is a list of integer values that represent column indexes.
-                the default value for this is None.
+    the default value for this is None.
 
     You will need to add these parameters to the function definition.
 
@@ -230,5 +300,12 @@ def display_reviews():
     :param cols: A list of integer values that represent column indexes
     :return: Does not return anything
     """
-    # TODO: Your code here
-    pass # can remove
+    for review in reviews:
+        if cols is None or not cols:
+            print(review)
+        else:
+            selected_data = [review[i] for i in cols]
+            print(selected_data)
+
+
+
