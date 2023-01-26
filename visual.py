@@ -11,16 +11,17 @@ Task 22 - 24: Write suitable functions to visualise the data as follows:
 
 Each function should visualise the data using Matplotlib.
 """
-import tui 
-import main
-import process 
+import csv
 import matplotlib.pyplot as plt
 import numpy as np
 
-Positive_Reviews = np.array([])
-Example_lables=["A", "B", "C", "D", "E"]
-my_explode= [0.2, 0, 0, 0, 0]
+open("hotel_reviews.csv", "r")
+data = np.read_csv('path/to/file.csv')
 
-plt.pie(z, Example_lables, explode = my_explode)
+Positive_Reviews = data['Positive_Reviews']
+Negative_Reviews = data['Negative_Reviews']
+
+
+plt.pie(Positive_Reviews , Negative_Reviews, labels = Positive_Reviews + Negative_Reviews)
 
 plt.show()
