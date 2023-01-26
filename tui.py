@@ -21,8 +21,9 @@ def welcome():
     """
 
 title = "Hotel Reviews"
-print("-" * len(title) + " " + title + " " + "-" * len(title))
-
+print("-" * len(title))
+print(" " + title + " ")
+print("-" * len(title))
 
 def error(msg):
     """
@@ -36,7 +37,8 @@ def error(msg):
     :return: does not return anything
     """
 
-print("Error!{error_msg}.")
+msg = "{error_msg}"
+print(f"Error!" + msg + ".")
 
 import time
 
@@ -62,7 +64,7 @@ def progress(operation, value):
 
 
     if value == 0:
-        status = "Loading has initiated"
+        status = "Loading initiated"
     elif value < 100:
         status = f"Loading in progress ({value}% completed)"
     else:
@@ -71,7 +73,7 @@ def progress(operation, value):
     time.sleep(1) 
 
 
-for i in range(1, 101, 40):
+for i in range(1, 101, 46 ):
     progress("Uploading Files", i)
 
 """"""
@@ -113,7 +115,6 @@ main_menu()
 
 
 
-
 def sub_menu(variant=0):
     """
     Task 5: Display a sub menu of options and read the user's response.
@@ -144,6 +145,7 @@ def sub_menu(variant=0):
     """
 
 
+
     if variant == 1:
         print('[1] Reviews for Hotel')
         print('[2] Reviews for Dates')
@@ -157,7 +159,6 @@ def sub_menu(variant=0):
         print('[1] All Reviews')
         print('[2] Reviews for Specific Hotel')
     else:
-
         print("Invalid choice. Please select a valid option.")
         return 0
    

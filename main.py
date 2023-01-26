@@ -46,6 +46,9 @@ def run():
             reviews_data.append(row)
     tui.display_num_reviews(len(reviews_data))
     tui.display_message("Data loaded.")
+
+
+
  # Task 14: Using the appropriate function in the module 'tui', display the main menu
         # Assign the value returned from calling the function to a suitable local variable
  # Task 15: Check if the user selected the option for processing data.  If so, then do the following:
@@ -189,8 +192,10 @@ class JSONReviewExporter(ReviewExporter):
         pass
 
 def run():
-    selected_option = tui.display_main_menu()
     import tui as tui
+    
+    selected_option = tui.display_main_menu()
+   
     exporter = JSONReviewExporter(reviews_data)
     if selected_option == 3:
         tui.display_message("Exporting Data...")
