@@ -6,9 +6,11 @@ A function may also need to format and/or structure a response e.g. return a lis
 Any errors or invalid inputs should be handled appropriately.
 Please note that you do not need to read the data file or perform any other such processing in this module.
 """
-
+import time
+import csv 
 
 def welcome():
+
     """
     Task 1: Display a welcome message.
 
@@ -20,10 +22,13 @@ def welcome():
     :return: Does not return anything.
     """
 
-title = "Hotel Reviews"
-print("-" * len(title))
-print(" " + title + " ")
-print("-" * len(title))
+
+    title = "Hotel Reviews"
+    print("-" * len(title))
+    print(" " + title + " ")
+    print("-" * len(title))
+
+welcome()
 
 def error(msg):
     """
@@ -37,10 +42,11 @@ def error(msg):
     :return: does not return anything
     """
 
-msg = "{error_msg}"
-print(f"Error!" + msg + ".")
+    print(f"Error!" + msg + ".")
 
-import time
+error(msg= "{error_msg}")
+
+
 
 def progress(operation, value):
     """
@@ -67,16 +73,14 @@ def progress(operation, value):
         status = "Loading initiated"
     elif value < 100:
         status = f"Loading in progress ({value}% completed)"
-    else:
+    elif value == 100:
         status = "Loading completed"
     print(f"Operation: {operation} [{status}].")
     time.sleep(1) 
 
 
-for i in range(1, 101, 46 ):
+for i in range(0, 101, 43 ):
     progress("Uploading Files", i)
-
-""""""
 
 
 
@@ -97,25 +101,35 @@ def main_menu():
 
     :return: an integer for a valid selection
     """
+    Option_count = 0
+    Option_limit = 3
+    out_of_option = False
 
-
-    while True:
+    while True and not(out_of_option):
         print("Main Menu")
         print('[1] Process Data', '\n[2] Visualise Data', '\n[3] Export Data', '\n[4] Exit') 
+        Option = int(input("Enter your choice: "))
+        
         try:
-            Option = int(input("Enter your choice: "))
+            Option = int(Option)
             if Option in range(1,5):
                 return Option
+                Option_count += 1
+           
             else:
-                raise ValueError
+                out_of_option = True
+                break
+                return main_menu
         except ValueError:
-            print("Invalid option. Please try again.")
+            print("Error! Invalid Choice")
+            return main_menu
 
 main_menu()
 
 
 
-def sub_menu(variant=0):
+def sub_menu(variant):
+
     """
     Task 5: Display a sub menu of options and read the user's response.
 
@@ -144,8 +158,6 @@ def sub_menu(variant=0):
     :return: 0 if invalid selection otherwise an integer for a valid selection
     """
 
-
-
     if variant == 1:
         print('[1] Reviews for Hotel')
         print('[2] Reviews for Dates')
@@ -159,25 +171,30 @@ def sub_menu(variant=0):
         print('[1] All Reviews')
         print('[2] Reviews for Specific Hotel')
     else:
-        print("Invalid choice. Please select a valid option.")
+        print("Please select Option 1 to 3")
+        raise ValueError
         return 0
-   
 
+    Option = input ("Enter your choice: ")
+      
+    open("hotel_reviews.csv", "r")
+    data = csv.reader ('path/to/file.csv')
+    
     try:
-        choice = int(input("Enter your choice: "))
-        if variant == 1 and choice in range(1,5):
-            return choice
-        elif variant == 2 and choice in range(1,4):
-            return choice
-        elif variant == 3 and choice in range(1,3):
-            return choice
+        Option = int(input(Option))
+        if (variant == 1 and Option in [1, 2, 3, 4]) or \
+           (variant == 2 and Option in [1, 2, 3]) or \
+           (variant == 3 and Option in [1, 2]):
+           return Option
         else:
-            raise ValueError
+            print("Invalid choice. Please try again!")
+            return sub_menu(variant)
+
     except ValueError:
         print("Invalid choice. Please select a valid option.")
-        return 0
+        return sub_menu(variant)
 
-sub_menu()
+sub_menu('variant')
 
 
 def total_reviews(num_reviews):
@@ -193,9 +210,14 @@ def total_reviews(num_reviews):
     :param num_reviews: the total number of reviews in the data set
     :return: Does not return anything
     """
+    
+
+    open("hotel_reviews.csv", "r")
+    num_reviews = csv.count ('path/to/file.csv'[total_reviews])
 
     print(f'There are {num_reviews} reviews in the data set.')
 
+total_reviews()
 
 def hotel_name():
     """
@@ -206,9 +228,12 @@ def hotel_name():
 
     :return: the name of a hotel
     """
+    
 
     hotel_name = input("Enter the hotel name: ")
     return hotel_name
+
+hotel_name()
 
 
 def review_dates():
@@ -225,15 +250,20 @@ def review_dates():
 
     :return: a list of review dates
     """
+    
 
-    dates = []
+    Review_date = []
     while True:
         date = input("Please enter a review date in the format mm/dd/yyyy ")
-        if date.lower() == 'done':
+
+        if date == "":
             break
-        else:
-            dates.append(date)
-    return dates
+        else: 
+            open("hotel_reviews.csv", "r")
+            csv.reader ('path/to/file.csv'[Review_date])
+            review_dates.read(review_dates)
+        print(date)
+    return review_dates
 
 review_dates()
 
@@ -265,10 +295,15 @@ def display_review(review, cols=None):
     :return: Does not return anything
     """
     
+    
+    open("hotel_reviews.csv", "r")
+    review = csv.read.lines ('path/to/file.csv'[0, 1, 3, 4, 5, 6])
+    
     if cols is None or not cols:
         print(review)
+
     else:
-        print([review[i] for i in cols])
+        print(next([review[i] for i in cols]))
 display_review()
 
 
@@ -309,4 +344,4 @@ def display_reviews(reviews, cols):
             print(selected_data)
 
 
-
+display_reviews()
