@@ -14,15 +14,16 @@ Note:   any user input/output should be done using the appropriate functions in 
 # This will be used to store the data read from the source data file.
 
 import csv 
+import process  
+import visual 
+import tui as tui
 
 reviews_data = []
 
 def run():
     # Task 12: Call the function welcome of the module 'tui'.
     # This will display our welcome message when the program is executed.
- import process  
- import visual 
- import tui as tui
+
 
  tui.welcome()
 
@@ -177,53 +178,51 @@ class ReviewExporter:
         self.reviews_data = reviews_data
 
     def export_all_reviews(self, file_name):
-        pass
+        print([])
 
     def export_reviews_by_hotel(self, hotel_name, file_name):
-        pass
+        print([])
 
 class JSONReviewExporter(ReviewExporter):
     def export_all_reviews(self, file_name):
         # code to export all reviews to a JSON file
-        pass
+        print([])
 
     def export_reviews_by_hotel(self, hotel_name, file_name):
         # code to export reviews for a specific hotel to a JSON file
-        pass
-
-def run():
-    import tui as tui
-    
-    selected_option = tui.display_main_menu()
-   
-    exporter = JSONReviewExporter(reviews_data)
-    if selected_option == 3:
-        tui.display_message("Exporting Data...")
-        variant_selected = tui.display_sub_menu(3)
-    if variant_selected == 1:
-        tui.display_message("Exporting All Reviews...")
-        exporter.export_all_reviews("reviews.json")
-    elif variant_selected == 2:
-        hotel_name = tui.get_hotel_name()
-        tui.display_message(f"Exporting Reviews for {hotel_name}...")
-        exporter.export_reviews_by_hotel(hotel_name, "reviews.json")
-    else:
-        tui.display_message("Invalid selection.")
-        tui.display_message("Data Export completed.")
-
-        # Task 26: Check if the user selected the option for exiting the program.
-        # If so, then break out of the loop
-
-    while True:
-        main_menu_option = tui.display_main_menu()
-        if main_menu_option == 4:
-            tui.display_message("Exiting program...")
-            break
+        
+        selected_option = tui.display_main_menu()
+        exporter = JSONReviewExporter(reviews_data)
+        
+        if selected_option == 3:
+            tui.display_message("Exporting Data...")
+            variant_selected = tui.display_sub_menu(3)
+        if variant_selected == 1:
+            tui.display_message("Exporting All Reviews...")
+            exporter.export_all_reviews("reviews.json")
+        elif variant_selected == 2:
+            hotel_name = tui.get_hotel_name()
+            tui.display_message(f"Exporting Reviews for {hotel_name}...")
+            exporter.export_reviews_by_hotel(hotel_name, "reviews.json")
+        else:
+            tui.display_message("Invalid selection.")
+            tui.display_message("Data Export completed.")
+            
+            # Task 26: Check if the user selected the option for exiting the program.
+            # If so, then break out of the loop
+ 
+            
+            while True:
+                main_menu_option = tui.display_main_menu()
+                if main_menu_option == 4:
+                    tui.display_message("Exiting program...")
+                    break
 
         # Task 27: If the user selected an invalid option then use the appropriate function of the
         # module tui to display an error message
-        else:
-            print("Error! The option selected is not valid!")
+                else:
+                    print("Error! The option selected is not valid!")
+                    return main_menu_option
 
 if __name__ == "__main__":
     run()
