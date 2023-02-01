@@ -11,11 +11,12 @@ Task 22 - 24: Write suitable functions to visualise the data as follows:
 
 Each function should visualise the data using Matplotlib.
 """
-import csv
+
 import matplotlib.pyplot as plt
 import numpy as np
+import csv
 
-open("hotel_reviews.csv", "r")
+
 data = np.read_csv('path/to/file.csv')
 
 Positive_Reviews = data['Positive_Reviews']
