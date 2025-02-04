@@ -1,3 +1,6 @@
+My very first project created. 
+
+
 ⦁	Task 1: 
 This code simply displays a welcome message through python print function.
 It creates a variable in this case called "title" and assigns it the value "Hotel Reviews". 
